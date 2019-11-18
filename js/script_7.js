@@ -78,9 +78,40 @@ jQuery(function($) {
        email.val($(this).val());
     })
     */
-    $('input[name=name]').keypress(function(event){
+
+    /* $('input[name=name]').keypress(function(event){
 
         let email =  $('input[name=email]');
         email.val($(this).val());
+     }) */
+
+     /////////////////Событие формы///////////////////////
+
+     /* $('input[name=name]').focus(function(){
+         $(this).val('Enter text')
      })
+
+     $('input[name=name]').blur(function(){
+        alert('Hi');
+    }) */
+
+    /* $('input[name=name]').select(function(){
+        alert('Hey')
+    }) */
+
+    /* $('.btn').click(function(e){
+        e.preventDefault();
+    }) */
+
+    /* $('form').submit(function(e){
+        e.preventDefault();
+       console.log($('input[name=name]').val());
+    }) */
+
+    /* $('input[name=name]').change(function(){
+        let email =  $('input[name=email]');
+        email.val($(this).val());
+    }) */
+
+
 })
