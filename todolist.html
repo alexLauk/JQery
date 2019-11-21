@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
-      $(document).ready(function () {
+      $(function() {
 
         $('#list-items').html(localStorage.getItem('listItems'));
 
@@ -32,24 +32,24 @@
 
         });
 
-        $(document).on('change', '.checkbox', function(){
-            //console.log($(this).attr('checked'));
-            if($(this).attr('checked')){
-                $(this).removeAttr('checked');
-               // console.log($(this));
-            } else {
-                $(this).attr('checked', 'checked');
-               // console.log($(this));
-            }
+        $('#list-items').on('change', '.checkbox', function(){
 
-            //console.log($(this));
-            $(this).toggleClass('completed'); // хочу добавить в li класс completed, чтобы потом применить стиль text-decoration: line-through. класс не добавляется
-            //console.log($(this).toggleClass('completed'));
+            if($(this).attr('checked')){
+
+                $(this).find(('span')).removeClass('completed'); //  удалить стиль text-decoration: line-through.
+                $(this).removeClass('bg');
+                $(this).removeAttr('checked');
+            } else {
+
+                $(this).find(('span')).addClass('completed'); //  добавить text-decoration: line-through.
+                $(this).addClass('bg');
+                $(this).attr('checked', 'checked');
+            }
 
             localStorage.setItem('listItems', $('#list-items').html());
         });
 
-        $(document).on('click', '.remove', function(){
+        $('#list-items').on('click', '.remove', function(){
 
             $(this).parent().parent().remove();
 
@@ -67,7 +67,13 @@
             color: red;
         }
 
-        .completed { text-decoration: line-through; }
+        .completed {
+            text-decoration: line-through;
+        }
+
+        .collection-item.checkbox.bg {
+            background-color:lightslategrey;
+        }
     </style>
 </head>
 <body>
