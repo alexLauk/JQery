@@ -17,96 +17,54 @@
 
         $('#list-items').html(localStorage.getItem('listItems'));
 
-        $('.add-items').submit(function(event)
-        {
-        event.preventDefault();
+        $('.add-items').submit(function(event){
+            event.preventDefault();
 
-        let item = $('#todo-list-item').val();
+            let item = $('#todo-list-item').val();
 
-        if(item){
-            $('#list-items').append(`<li class="collection-item"><label><input type='checkbox'/><span>${item}</span><a class='remove'>x</a></label></li>`);
+            if(item){
+                $('#list-items').append(`<li class="collection-item checkbox"><label><input type='checkbox'/><span>${item}</span><a class='remove'>&#10060</a></label></li>`);
 
+                localStorage.setItem('listItems', $('#list-items').html());
+
+                $('#todo-list-item').val("");
+            }
+
+        });
+
+        $(document).on('change', '.checkbox', function(){
+            //console.log($(this).attr('checked'));
+            if($(this).attr('checked')){
+                $(this).removeAttr('checked');
+               // console.log($(this));
+            } else {
+                $(this).attr('checked', 'checked');
+               // console.log($(this));
+            }
+
+            //console.log($(this));
+            $(this).toggleClass('completed'); // хочу добавить в li класс completed, чтобы потом применить стиль text-decoration: line-through. класс не добавляется
+            //console.log($(this).toggleClass('completed'));
 
             localStorage.setItem('listItems', $('#list-items').html());
-
-            $('#todo-list-item').val("");
-        }
-
         });
 
-        $(document).on('change', '.checkbox', function()
-        {
-        if($(this).attr('checked'))
-        {
-            $(this).removeAttr('checked');
-        }
-        else
-        {
-            $(this).attr('checked', 'checked');
-        }
-        console.log($(this));
+        $(document).on('click', '.remove', function(){
 
-        $(this).parent().toggleClass('completed');
+            $(this).parent().parent().remove();
 
-        localStorage.setItem('listItems', $('#list-items').html());
-        });
-
-        $(document).on('click', '.remove', function()
-        {
-        $(this).parent().remove();
-
-        localStorage.setItem('listItems', $('#list-items').html());
+            localStorage.setItem('listItems', $('#list-items').html());
         });
 
     });
 
     </script>
     <style>
-        /* form {
-            outline: 0;
-            height: 36px;
-            margin-top: 5%;
-            border: 3px solid #3b3b3b;
-        }
-
-            input[type="text"] {
-            outline: 0;
-            width: 55%;
-            height: 32px;
-            border: none;
-            font-size: 18px;
-            font-weight: normal;
-            padding-left: 10px;
-        }
-
-        .add {
-            outline: 0;
-            float: right;
-            width: 34%;
-            height: 36px;
-            color: #fff;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            background-color: #3b3b3b;
-        }
-
-        ul {
-            padding: 0;
-            text-align: left;
-            list-style: none;
-        }
-
-        hr {
-            border-bottom: 0;
-            margin: 15px 0;
-        }
-
-        input[type="checkbox"] { width: 30px; } */
 
         .remove {
             float: right;
             cursor: pointer;
+            color: red;
         }
 
         .completed { text-decoration: line-through; }
@@ -116,22 +74,16 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <!-- <ul id="list-items"></ul> -->
                 <ul class="collection" id="list-items"></ul>
                 <form class="add-items">
-                    <!-- <input type="text" class="form-control" id="todo-list-item" placeholder="What do you need to do today?"> -->
                     <div class="input-field col s12">
-                            <textarea id="todo-list-item" class="materialize-textarea"></textarea>
-                            <label for="textarea1">What do you need to do today?</label>
+                        <textarea id="todo-list-item" class="materialize-textarea"></textarea>
+                        <label for="textarea1">What do you need to do today?</label>
                     </div>
-                    <!-- <button class="add" type="submit">Add to List</button> -->
                     <button class="btn add" type="submit" name="action">Add to List</button>
                 </form>
             </div>
         </div>
     </div>
-
-
-
 </body>
 </html>
